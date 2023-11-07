@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "qwik-city-marvel-app",
+  "short_name": "Qwik City Marvel App",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Marvel app using Qwik framework"
+}
