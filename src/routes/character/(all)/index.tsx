@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import {
   routeLoader$,
   server$,
@@ -21,10 +21,17 @@ export const getMore = server$(async function (page: number) {
 
 export default component$(() => {
   const characters = useCharactersLoader();
+  const { total, results } = characters.value.data || {};
+
   const currentPage = useSignal<number>(1);
-  const collection = useSignal<Character[]>(
-    characters.value.data?.results || []
-  );
+  const collection = useSignal<Character[]>(results || []);
+
+  const handleMore = $(async () => {
+    const newData = await getMore(currentPage.value + 1);
+    const newMedia = newData.data?.results || [];
+    collection.value = [...collection.value, ...newMedia];
+    currentPage.value += 1;
+  });
 
   return (
     <MediaGrid
@@ -33,24 +40,20 @@ export default component$(() => {
           unforgettable personalities."
       collection={collection.value}
       currentPage={currentPage.value}
-      pageCount={getTotalPages(characters.value.data?.total, 18)}
-      total={characters.value.data?.total}
-      onMore$={async () => {
-        const data = await getMore(currentPage.value + 1);
-        const newMedia = data.data?.results || [];
-        collection.value = [...collection.value, ...newMedia];
-        currentPage.value += 1;
-      }}
+      pageCount={getTotalPages(total, 18)}
+      total={total}
+      onMore$={handleMore}
     />
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Characters | Marvel',
+  title: 'Marvel Characters, Super Heroes, &amp; Villains | Qwik City Marvel',
   meta: [
     {
       name: 'description',
-      content: 'Learn about your favorite Marvel characters!',
+      content:
+        'Learn about your favorite Marvel characters, super heroes, &amp; villains!',
     },
   ],
 };

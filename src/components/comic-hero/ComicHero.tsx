@@ -10,8 +10,8 @@ type Props = {
 
 export const ComicHero = component$((props: Props) => (
   <section class="bg-base-200 mt-8">
-    <div class="flex items-center">
-      <div class="w-1/3 p-8">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="w-full md:w-1/3 p-0 md:p-8">
         <img
           width={560}
           height={865}
@@ -20,9 +20,9 @@ export const ComicHero = component$((props: Props) => (
           class="w-full h-auto m-0 object-cover object-top"
         />
       </div>
-      <div class="w-2/3 p-8">
-        <h1 class="text-5xl mt-0 mb-4">{props.media.title}</h1>
-        <h2 class="text-2xl text-primary">{`From the ${props.media.series?.name} series`}</h2>
+      <div class="w-full md:w-2/3 p-8">
+        <h1 class="mt-0 mb-4">{props.media.title}</h1>
+        <h2 class="text-primary font-bold after:content-none">{`From the ${props.media.series?.name} series`}</h2>
         {props.media.description && (
           <p class="my-4">{props.media.description}</p>
         )}

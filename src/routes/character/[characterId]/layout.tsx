@@ -38,12 +38,17 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = {
-  title: 'Character details | Marvel',
-  meta: [
-    {
-      name: 'description',
-      content: 'Learn about your Marvel character!',
-    },
-  ],
+export const head: DocumentHead = ({ resolveValue }) => {
+  const resource = resolveValue(useCharacterLoader);
+  const { name } = resource.data?.results?.[0] || {};
+
+  return {
+    title: `${name} | Qwik City Marvel`,
+    meta: [
+      {
+        name: 'description',
+        content: `Learn more about ${name}!`,
+      },
+    ],
+  };
 };

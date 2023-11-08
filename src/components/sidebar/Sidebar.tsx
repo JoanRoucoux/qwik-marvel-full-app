@@ -16,7 +16,7 @@ export const Sidebar = component$(() => {
           <div class="bg-base-200 hidden items-center px-4 py-6 lg:flex justify-center sticky top-0">
             <Logo />
           </div>
-          <ul class="menu menu-lg p-0">
+          <ul class="menu menu-lg p-0 font-bold">
             {routes.map((route, index) => (
               <li key={index}>
                 <a

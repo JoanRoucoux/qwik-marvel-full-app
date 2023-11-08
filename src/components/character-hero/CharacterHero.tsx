@@ -10,11 +10,11 @@ type Props = {
 
 export const CharacterHero = component$((props: Props) => (
   <section class="bg-base-200 mt-8">
-    <div class="flex items-center">
-      <div class="w-1/2 p-8">
-        <h1 class="text-5xl mt-0 mb-4">{props.media.name}</h1>
+    <div class="flex flex-col-reverse md:flex-row items-center">
+      <div class="w-full md:w-1/2 p-8">
+        <h1 class="mt-0 mb-4">{props.media.name}</h1>
         {props.media.description && (
-          <p class="text-lg mb-0">{props.media.description}</p>
+          <p class="after:content-none	mb-0">{props.media.description}</p>
         )}
         {props.clickable && (
           <a
@@ -25,7 +25,7 @@ export const CharacterHero = component$((props: Props) => (
           </a>
         )}
       </div>
-      <div class="w-1/2 p-8">
+      <div class="w-full md:w-1/2 p-0 md:p-8">
         <img
           width={850}
           height={850}

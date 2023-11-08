@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import {
   routeLoader$,
   server$,
@@ -21,8 +21,17 @@ export const getMore = server$(async function (page: number) {
 
 export default component$(() => {
   const comics = useComicsLoader();
+  const { total, results } = comics.value.data || {};
+
   const currentPage = useSignal<number>(1);
-  const collection = useSignal<Comic[]>(comics.value.data?.results || []);
+  const collection = useSignal<Comic[]>(results || []);
+
+  const handleMore = $(async () => {
+    const newData = await getMore(currentPage.value + 1);
+    const newMedia = newData.data?.results || [];
+    collection.value = [...collection.value, ...newMedia];
+    currentPage.value += 1;
+  });
 
   return (
     <MediaGrid
@@ -30,24 +39,19 @@ export default component$(() => {
       description="Home of iconic characters and captivating storylines, inspiring fans for decades."
       collection={collection.value}
       currentPage={currentPage.value}
-      pageCount={getTotalPages(comics.value.data?.total, 18)}
-      total={comics.value.data?.total}
-      onMore$={async () => {
-        const data = await getMore(currentPage.value + 1);
-        const newMedia = data.data?.results || [];
-        collection.value = [...collection.value, ...newMedia];
-        currentPage.value += 1;
-      }}
+      pageCount={getTotalPages(total, 18)}
+      total={total}
+      onMore$={handleMore}
     />
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Comics | Marvel',
+  title: 'Marvel Comics | Qwik City Marvel',
   meta: [
     {
       name: 'description',
-      content: 'Learn about your favorite Marvel comics!',
+      content: 'Learn about your favorite Marvel Comics!',
     },
   ],
 };

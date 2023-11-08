@@ -9,17 +9,20 @@ type Props = {
 };
 
 export const MediaCarousel = component$((props: Props) => (
-  <section class="mt-4">
+  <section class="my-8">
     <div class="flex flex-row items-center justify-between">
-      <h2 class="text-2xl uppercase">{props.title}</h2>
+      <h2>{props.title}</h2>
       {props.viewAllHref && (
-        <a class="btn btn-primary" href={props.viewAllHref}>
+        <a
+          class="btn btn-primary hidden md:inline-flex"
+          href={props.viewAllHref}
+        >
           Explore All
         </a>
       )}
     </div>
     <div class="relative">
-      <div class="overflow-y-auto py-6">
+      <div class="overflow-y-auto pt-6">
         <div class="carousel flex w-max flex-row gap-4">
           {props.collection?.map((media, index) => (
             <div key={`${media.id}-${index}`} class="carousel-item">

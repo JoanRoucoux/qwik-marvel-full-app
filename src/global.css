@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  height: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -9,6 +14,22 @@ h4,
 h5,
 h6 {
   font-weight: bold;
+}
+
+h1 {
+  @apply text-3xl lg:text-5xl;
+}
+
+h2 {
+  @apply text-xl lg:text-3xl;
+}
+
+h2:after {
+  content: ' ';
+  display: block;
+  border: 2px solid #e62429;
+  width: 4rem;
+  margin-top: 0.5rem;
 }
 
 .btn {

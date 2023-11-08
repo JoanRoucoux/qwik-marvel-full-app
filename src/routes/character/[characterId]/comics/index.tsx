@@ -1,5 +1,5 @@
-import { component$, useSignal } from '@builder.io/qwik';
-import { DocumentHead, routeLoader$, server$, z } from '@builder.io/qwik-city';
+import { $, component$, useSignal } from '@builder.io/qwik';
+import { routeLoader$, server$, z } from '@builder.io/qwik-city';
 import { getCharacterComics, getMarvelContext } from '~/services/marvel';
 import type { Comic } from '~/services/types';
 import { getTotalPages } from '~/utils/format';
@@ -46,33 +46,25 @@ const getMore = server$(async function (page: number) {
 
 export default component$(() => {
   const characterComics = useCharacterComicsLoader();
+  const { total, results } = characterComics.value.data || {};
+
   const currentPage = useSignal<number>(1);
-  const collection = useSignal<Comic[]>(
-    characterComics.value.data?.results || []
-  );
+  const collection = useSignal<Comic[]>(results || []);
+
+  const handleMore = $(async () => {
+    const newData = await getMore(currentPage.value + 1);
+    const newMedia = newData.data?.results || [];
+    collection.value = [...collection.value, ...newMedia];
+    currentPage.value += 1;
+  });
 
   return (
     <MediaGrid
       collection={collection.value}
       currentPage={currentPage.value}
-      pageCount={getTotalPages(characterComics.value.data?.total, 18)}
-      total={characterComics.value.data?.total}
-      onMore$={async () => {
-        const data = await getMore(currentPage.value + 1);
-        const newMedia = data.data?.results || [];
-        collection.value = [...collection.value, ...newMedia];
-        currentPage.value += 1;
-      }}
+      pageCount={getTotalPages(total, 18)}
+      total={total}
+      onMore$={handleMore}
     />
   );
 });
-
-export const head: DocumentHead = {
-  title: 'Character details | Marvel',
-  meta: [
-    {
-      name: 'description',
-      content: 'Learn about your Marvel character!',
-    },
-  ],
-};

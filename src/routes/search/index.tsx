@@ -5,12 +5,11 @@ import {
   type DocumentHead,
   useLocation,
 } from '@builder.io/qwik-city';
-import { HiMagnifyingGlassSolid } from '@qwikest/icons/heroicons';
 import { getCharacters, getComics, getMarvelContext } from '~/services/marvel';
 import type { Character, Comic } from '~/services/types';
 import { isArrayEmpty } from '~/utils/array';
 import { getTotalPages } from '~/utils/format';
-import { MediaGrid } from '~/components';
+import { MediaGrid, SearchForm } from '~/components';
 
 export const useSearchLoader = routeLoader$(async (event) => {
   const searchTerm = event.url.searchParams.get('search');
@@ -76,66 +75,27 @@ export default component$(() => {
   });
 
   const handleMore = $(async () => {
-    const data = await getMore({
+    const newData = await getMore({
       page: currentPage.value + 1,
       searchTerm: searchTerm.value,
       media: media.value,
     });
-    const newMedia = data.data?.results || [];
+    const newMedia = newData.data?.results || [];
     collection.value = [...collection.value, ...newMedia];
     currentPage.value += 1;
   });
 
-  const options = [
-    {
-      name: 'Character',
-      value: 'character',
-    },
-    {
-      name: 'Comic',
-      value: 'comic',
-    },
-  ];
-
   return (
     <>
-      <section class="bg-base-200 mt-8">
-        <div class="flex flex-col items-center gap-4 p-4">
-          <h1 class="text-3xl uppercase">Explore</h1>
-          <p>Search your favorite Marvel characters and comics!</p>
-          <form class="flex justify-center items-center max-w-lg w-full gap-4">
-            <input
-              type="text"
-              placeholder="Spider-Man, Thor, Avengers..."
-              name="search"
-              class="input w-full"
-              bind:value={searchTerm}
-              onChange$={handleSearchChange}
-            />
-            <select
-              class="select w-fautoull"
-              name="media"
-              bind:value={media}
-              onChange$={handleMediaChange}
-            >
-              {options?.map((item, index) => (
-                <option
-                  key={`${item.value}-${index}`}
-                  value={item.value}
-                  selected={item.value === media.value}
-                >
-                  {item.name}
-                </option>
-              ))}
-            </select>
-            <button type="submit" class="btn btn-primary">
-              <HiMagnifyingGlassSolid class="h-6 w-6" />
-            </button>
-          </form>
-        </div>
-      </section>
+      <SearchForm
+        media={media.value}
+        searchTerm={searchTerm.value}
+        onMediaChange={handleMediaChange}
+        onSearchChange={handleSearchChange}
+      />
       {!isArrayEmpty<Comic | Character>(resource.value?.data?.results) && (
         <MediaGrid
+          title="Results"
           collection={collection.value}
           currentPage={currentPage.value}
           pageCount={getTotalPages(resource.value?.data?.total, 18)}
@@ -148,11 +108,11 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Search | Marvel',
+  title: 'Search | Qwik City Marvel',
   meta: [
     {
       name: 'description',
-      content: 'Search your favorite Marvel characters and comics!',
+      content: 'Search for your favorite Marvel characters and comics!',
     },
   ],
 };

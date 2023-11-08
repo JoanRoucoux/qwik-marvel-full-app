@@ -25,20 +25,21 @@ export const MediaGrid = component$((props: Props) => {
   });
 
   const showHeader =
-    !isStringEmpty(props.title) && !isStringEmpty(props.description);
+    !isStringEmpty(props.title) || !isStringEmpty(props.description);
 
   return (
     <section class="my-8">
       {showHeader && (
-        <div class="flex justify-between mb-8">
-          <div>
-            <h1 class="text-3xl uppercase">{props.title}</h1>
-            <p>{props.description}</p>
-          </div>
-          <p>Total results: {props.total}</p>
+        <div class="flex flex-col gap-4 mb-8">
+          <h1 class="text-3xl flex flex-col md:flex-row items-center gap-4">
+            {props.title} <span class="badge badge-lg">{props.total}</span>
+          </h1>
+          {props.description && (
+            <p class="text-center md:text-left">{props.description}</p>
+          )}
         </div>
       )}
-      <div class="grid grid-cols-6 gap-4">
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(12rem,1fr))] justify-items-center gap-4">
         {props.collection?.map((media) => (
           <MediaCard key={`${media.id}`} media={media} />
         ))}

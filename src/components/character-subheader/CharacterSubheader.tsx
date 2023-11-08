@@ -6,13 +6,13 @@ export const CharacterSubheader = component$(() => {
   const location = useLocation();
 
   return (
-    <section class="bg-base-200 mt-4">
+    <section class="bg-primary mt-4">
       <div class="flex flex-row items-center justify-center gap-4 p-4">
         {routes(+location.params.characterId).map((item, index) => (
           <a
             key={`${item.name}-${index}`}
             href={item.path}
-            class="text-xl uppercase link link-hover"
+            class="text-xl font-bold uppercase link link-hover"
           >
             {item.name}
           </a>
