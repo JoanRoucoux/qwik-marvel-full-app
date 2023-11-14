@@ -5,7 +5,7 @@ import { paths } from '~/utils/paths';
 import { Logo } from '~/components';
 
 export const Header = component$(() => (
-  <div class="bg-base-200 flex h-16 w-full justify-center sticky top-0 lg:hidden">
+  <div class="bg-base-200 flex h-16 w-full justify-center sticky top-0 z-10 lg:hidden">
     <div class="navbar w-full">
       <div class="navbar-start">
         <span

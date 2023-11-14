@@ -34,3 +34,6 @@ tailwind.config.js
 prettier.config.cjs
 postcss.config.js
 src/global.css
+
+# AWS-lambda
+.serverless

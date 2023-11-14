@@ -6,7 +6,7 @@ import { getTotalPages } from '~/utils/format';
 import { paths } from '~/utils/paths';
 import { MediaGrid } from '~/components';
 
-const useCharacterComicsLoader = routeLoader$(async (event) => {
+export const useCharacterComicsLoader = routeLoader$(async (event) => {
   const parseResult = await z
     .object({ characterId: z.coerce.number().min(0).step(1) })
     .safeParseAsync(event.params);
