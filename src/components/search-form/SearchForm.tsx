@@ -40,7 +40,7 @@ export const SearchForm = component$((props: Props) => (
           ))}
         </select>
         <button type="submit" class="btn btn-primary w-full md:w-1/6">
-          <HiMagnifyingGlassSolid class="h-6 w-6" />
+          <HiMagnifyingGlassSolid class="h-6 w-6 text-base-content" />
         </button>
       </form>
     </div>

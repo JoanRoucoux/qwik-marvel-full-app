@@ -29,7 +29,7 @@ export const ComicHero = component$((props: Props) => (
         {props.clickable && (
           <a
             href={paths.media('comic', props.media.id)}
-            class="btn btn-wide btn-primary mt-8"
+            class="btn btn-wide btn-primary text-base-content mt-8"
           >
             See more
           </a>

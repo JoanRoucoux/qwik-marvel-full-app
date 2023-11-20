@@ -10,9 +10,8 @@ module.exports = {
     themes: [
       {
         dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+          ...require('daisyui/src/theming/themes')['dark'],
           primary: '#e62429',
-          'primary-focus': '#9f0013',
           'base-100': '#191919',
           'base-200': '#0c0c0c',
           'base-300': '#000000',

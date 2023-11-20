@@ -48,7 +48,7 @@ export const MediaGrid = component$((props: Props) => {
         <div class="flex justify-center mt-4">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary text-base-content"
             onClick$={handleOnClick}
             disabled={isDisabled.value}
           >

@@ -14,7 +14,7 @@ export const MediaCarousel = component$((props: Props) => (
       <h2>{props.title}</h2>
       {props.viewAllHref && (
         <a
-          class="btn btn-primary hidden md:inline-flex"
+          class="btn btn-primary text-base-content hidden md:inline-flex"
           href={props.viewAllHref}
         >
           Explore All
