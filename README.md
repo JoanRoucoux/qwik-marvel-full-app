@@ -1,3 +1,26 @@
+# Qwik City Marvel App
+
+This application allows you to discover Marvel comics and characters.
+
+Don't forget to add a `.env.local` file if you want to try it:
+```
+VITE_MARVEL_PUBLIC_API_KEY=XXXX
+VITE_MARVEL_PRIVATE_API_KEY=YYYY
+```
+
+## Stack
+| Client | API |
+| ------------- | ------------- |
+| Qwik | Marvel API |
+
+## Demo
+<div>
+    <img width="400" alt="qwik-city-marvel-app_home" src="https://github.com/JoanRoucoux/qwik-city-marvel-app/assets/21682157/a5ebd157-24fb-44bd-856e-2277c4c03303">
+    <img width="400" alt="qwik-city-marvel-app_search" src="https://github.com/JoanRoucoux/qwik-city-marvel-app/assets/21682157/5292766b-6fad-400a-bdf0-5eec0b57252f">
+    <img width="400" alt="qwik-city-marvel-app_comic" src="https://github.com/JoanRoucoux/qwik-city-marvel-app/assets/21682157/fde83788-1ac9-4dbc-b078-9e944552b94b">
+    <img width="400" alt="qwik-city-marvel-app_character" src="https://github.com/JoanRoucoux/qwik-city-marvel-app/assets/21682157/83384dec-e837-442f-a463-33986cc40618">
+</div>
+
 # Qwik City App ⚡️
 
 - [Qwik Docs](https://qwik.builder.io/)
