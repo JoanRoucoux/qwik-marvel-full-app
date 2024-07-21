@@ -12,17 +12,14 @@ export const MediaCard = component$((props: Props) => {
   const mediaType = getMediaType(props.media);
   const heading = getHeading(props.media);
 
-  const hrefClass = `bg-base-200 w-48 overflow-hidden`;
-  const imgClass = `object-cover object-top w-48 h-72`;
-
   return (
-    <a href={paths.media(mediaType, props.media.id)} class={hrefClass}>
+    <a href={paths.media(mediaType, props.media.id)} class="bg-base-200 w-48 overflow-hidden">
       <div class="hover:scale-105 transition duration-300">
         <img
           alt={heading}
           width={192}
           height={288}
-          class={imgClass}
+          class="object-cover object-top w-48 h-72"
           src={getThumbnail(props.media.thumbnail)}
         />
       </div>

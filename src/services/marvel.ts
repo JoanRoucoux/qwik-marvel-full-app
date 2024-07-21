@@ -5,6 +5,7 @@ import { getOffset } from '~/utils/format';
 import type { DataWrapper, Character, Comic } from './types';
 
 export const getMarvelContext = (event: RequestEventBase) => {
+  const baseURL = event.env.get('VITE_MARVEL_PUBLIC_BASE_URL');
   const publicApiKey = event.env.get('VITE_MARVEL_PUBLIC_API_KEY');
   const privateApiKey = event.env.get('VITE_MARVEL_PRIVATE_API_KEY');
   const ts = Date.now().toString();
@@ -13,7 +14,7 @@ export const getMarvelContext = (event: RequestEventBase) => {
   return {
     publicApiKey,
     privateApiKey,
-    baseURL: 'https://gateway.marvel.com/v1/public',
+    baseURL,
     ts,
     hash,
   };
@@ -45,7 +46,9 @@ const fetchMarvel = async <T = unknown>({
   if (!response.ok) {
     // eslint-disable-next-line no-console
     console.error(url);
-    throw new Error(response.statusText);
+    throw new Error(
+      `[fetchMarvelAPI] An error occurred: ${response.statusText}`
+    );
   }
 
   return response.json();

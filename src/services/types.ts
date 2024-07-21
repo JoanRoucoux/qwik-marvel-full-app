@@ -1,4 +1,4 @@
-type Nullable<T> = T | null;
+export type Nullable<T> = T | null;
 
 export type DataWrapper<T> = {
   code?: number;

@@ -8,5 +8,5 @@ export const paths = {
   comics: '/comic',
   search: '/search',
   media: (mediaType: MediaType, id: number) => `/${mediaType}/${id}`,
-  github: 'https://github.com/JoanRoucoux/qwik-city-marvel-app',
+  github: 'https://github.com/JoanRoucoux/qwik-marvel-full-app',
 };
