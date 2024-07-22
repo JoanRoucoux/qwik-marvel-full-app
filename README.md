@@ -1,9 +1,10 @@
 # Qwik City Marvel App
 
-This application allows you to discover Marvel comics and characters.
+This application allows you to explore Marvel comics and characters using Qwik, Tailwind CSS and the Marvel API.
 
 Don't forget to add a `.env.local` file if you want to try it:
 ```
+VITE_MARVEL_PUBLIC_BASE_URL=https://gateway.marvel.com/v1/public
 VITE_MARVEL_PUBLIC_API_KEY=XXXX
 VITE_MARVEL_PRIVATE_API_KEY=YYYY
 ```
